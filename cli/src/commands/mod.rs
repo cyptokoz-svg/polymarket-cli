@@ -1,4 +1,5 @@
 pub mod comments;
+pub mod data;
 pub mod events;
 pub mod markets;
 pub mod profiles;
