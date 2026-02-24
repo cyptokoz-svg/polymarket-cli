@@ -8,10 +8,10 @@ Rust CLI for Polymarket. Browse markets, place orders, manage positions, and int
 # From source
 git clone https://github.com/user/polymarket-cli
 cd polymarket-cli
-cargo install --path cli
+cargo install --path .
 
 # Or build without installing
-cargo build --release -p polymarket-cli
+cargo build --release
 # Binary at target/release/polymarket
 ```
 
@@ -468,7 +468,7 @@ fi
 ## Architecture
 
 ```
-cli/src/
+src/
   main.rs        -- CLI entry point, clap parsing, error handling
   auth.rs        -- Wallet resolution, RPC provider, CLOB authentication
   config.rs      -- Config file (~/.config/polymarket/config.json)
