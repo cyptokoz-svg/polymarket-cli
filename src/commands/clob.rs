@@ -1,18 +1,5 @@
 use std::str::FromStr;
 
-use anyhow::Result;
-use chrono::NaiveDate;
-use clap::{Args, Subcommand};
-use polymarket_client_sdk::clob;
-use polymarket_client_sdk::clob::types::{
-    Amount, AssetType, Interval, OrderType, Side, TimeRange,
-    request::{
-        BalanceAllowanceRequest, CancelMarketOrderRequest, DeleteNotificationsRequest,
-        LastTradePriceRequest, MidpointRequest, OrderBookSummaryRequest, OrdersRequest,
-        PriceHistoryRequest, PriceRequest, SpreadRequest, TradesRequest, UserRewardsEarningRequest,
-    },
-};
-use polymarket_client_sdk::types::{B256, Decimal, U256};
 use crate::auth;
 use crate::output::OutputFormat;
 use crate::output::clob::{
@@ -26,6 +13,19 @@ use crate::output::clob::{
     print_rewards, print_server_time, print_simplified_markets, print_spread, print_spreads,
     print_tick_size, print_trades, print_user_earnings_markets,
 };
+use anyhow::Result;
+use chrono::NaiveDate;
+use clap::{Args, Subcommand};
+use polymarket_client_sdk::clob;
+use polymarket_client_sdk::clob::types::{
+    Amount, AssetType, Interval, OrderType, Side, TimeRange,
+    request::{
+        BalanceAllowanceRequest, CancelMarketOrderRequest, DeleteNotificationsRequest,
+        LastTradePriceRequest, MidpointRequest, OrderBookSummaryRequest, OrdersRequest,
+        PriceHistoryRequest, PriceRequest, SpreadRequest, TradesRequest, UserRewardsEarningRequest,
+    },
+};
+use polymarket_client_sdk::types::{B256, Decimal, U256};
 
 #[derive(Args)]
 pub struct ClobArgs {

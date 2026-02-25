@@ -1,4 +1,3 @@
-use polymarket_client_sdk::types::{Address, B256};
 use crate::output::OutputFormat;
 use crate::output::data::{
     print_activity, print_builder_leaderboard, print_builder_volume, print_closed_positions,
@@ -15,6 +14,7 @@ use polymarket_client_sdk::data::{
         TraderLeaderboardRequest, TradesRequest, ValueRequest,
     },
 };
+use polymarket_client_sdk::types::{Address, B256};
 
 #[derive(Args)]
 pub struct DataArgs {
@@ -235,18 +235,14 @@ async fn execute_user(
         }
 
         DataCommand::Value { address } => {
-            let request = ValueRequest::builder()
-                .user(address)
-                .build();
+            let request = ValueRequest::builder().user(address).build();
 
             let values = client.value(&request).await?;
             print_value(&values, output)?;
         }
 
         DataCommand::Traded { address } => {
-            let request = TradedRequest::builder()
-                .user(address)
-                .build();
+            let request = TradedRequest::builder().user(address).build();
 
             let traded = client.traded(&request).await?;
             print_traded(&traded, output)?;

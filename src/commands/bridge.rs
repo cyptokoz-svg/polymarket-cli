@@ -38,9 +38,7 @@ pub async fn execute(
 ) -> Result<()> {
     match args.command {
         BridgeCommand::Deposit { address } => {
-            let request = DepositRequest::builder()
-                .address(address)
-                .build();
+            let request = DepositRequest::builder().address(address).build();
 
             let response = client.deposit(&request).await?;
             print_deposit(&response, &output)?;

@@ -3,7 +3,9 @@ use polymarket_client_sdk::types::Decimal;
 use tabled::settings::Style;
 use tabled::{Table, Tabled};
 
-use super::{NONE, active_status, detail_field, format_date, format_decimal, print_detail_table, truncate};
+use super::{
+    NONE, active_status, detail_field, format_date, format_decimal, print_detail_table, truncate,
+};
 
 #[derive(Tabled)]
 struct MarketRow {
@@ -25,7 +27,10 @@ fn market_to_row(m: &Market) -> MarketRow {
         .outcome_prices
         .as_ref()
         .and_then(|p| p.first())
-        .map_or_else(|| NONE.into(), |p| format!("{:.2}¢", p * Decimal::from(100)));
+        .map_or_else(
+            || NONE.into(),
+            |p| format!("{:.2}¢", p * Decimal::from(100)),
+        );
 
     MarketRow {
         question: truncate(question, 60),

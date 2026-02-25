@@ -1,9 +1,9 @@
 use std::fmt::Write as _;
 use std::str::FromStr;
 
+use alloy::signers::local::PrivateKeySigner;
 use anyhow::{Context, Result, bail};
 use clap::{Args, Subcommand};
-use alloy::signers::local::PrivateKeySigner;
 use polymarket_client_sdk::auth::LocalSigner;
 use polymarket_client_sdk::auth::Signer as _;
 use polymarket_client_sdk::{POLYGON, derive_proxy_wallet};
@@ -276,4 +276,3 @@ fn cmd_reset(output: &OutputFormat, force: bool) -> Result<()> {
     }
     Ok(())
 }
-

@@ -2,7 +2,9 @@ use polymarket_client_sdk::gamma::types::response::Event;
 use tabled::settings::Style;
 use tabled::{Table, Tabled};
 
-use super::{NONE, active_status, detail_field, format_date, format_decimal, print_detail_table, truncate};
+use super::{
+    NONE, active_status, detail_field, format_date, format_decimal, print_detail_table, truncate,
+};
 
 #[derive(Tabled)]
 struct EventRow {
