@@ -278,7 +278,14 @@ async fn execute_user(
             print_activity(&activity, output)?;
         }
 
-        _ => unreachable!(),
+        DataCommand::Holders { .. }
+        | DataCommand::OpenInterest { .. }
+        | DataCommand::Volume { .. }
+        | DataCommand::Leaderboard { .. }
+        | DataCommand::BuilderLeaderboard { .. }
+        | DataCommand::BuilderVolume { .. } => {
+            unreachable!("execute() routes market/leaderboard commands to other handlers")
+        }
     }
 
     Ok(())
@@ -313,7 +320,17 @@ async fn execute_market(
             print_live_volume(&volume, output)?;
         }
 
-        _ => unreachable!(),
+        DataCommand::Positions { .. }
+        | DataCommand::ClosedPositions { .. }
+        | DataCommand::Value { .. }
+        | DataCommand::Traded { .. }
+        | DataCommand::Trades { .. }
+        | DataCommand::Activity { .. }
+        | DataCommand::Leaderboard { .. }
+        | DataCommand::BuilderLeaderboard { .. }
+        | DataCommand::BuilderVolume { .. } => {
+            unreachable!("execute() routes user/leaderboard commands to other handlers")
+        }
     }
 
     Ok(())
@@ -366,7 +383,17 @@ async fn execute_leaderboard(
             print_builder_volume(&entries, output)?;
         }
 
-        _ => unreachable!(),
+        DataCommand::Positions { .. }
+        | DataCommand::ClosedPositions { .. }
+        | DataCommand::Value { .. }
+        | DataCommand::Traded { .. }
+        | DataCommand::Trades { .. }
+        | DataCommand::Activity { .. }
+        | DataCommand::Holders { .. }
+        | DataCommand::OpenInterest { .. }
+        | DataCommand::Volume { .. } => {
+            unreachable!("execute() routes user/market commands to other handlers")
+        }
     }
 
     Ok(())

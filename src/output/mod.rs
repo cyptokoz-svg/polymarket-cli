@@ -27,7 +27,7 @@ pub enum OutputFormat {
     Json,
 }
 
-pub fn truncate(s: &str, max: usize) -> String {
+pub(crate) fn truncate(s: &str, max: usize) -> String {
     if s.chars().count() <= max {
         return s.to_string();
     }
@@ -36,7 +36,7 @@ pub fn truncate(s: &str, max: usize) -> String {
     truncated
 }
 
-pub fn format_decimal(n: Decimal) -> String {
+pub(crate) fn format_decimal(n: Decimal) -> String {
     let f = n.to_f64().unwrap_or(0.0);
     if f >= 1_000_000.0 {
         format!("${:.1}M", f / 1_000_000.0)
@@ -47,11 +47,11 @@ pub fn format_decimal(n: Decimal) -> String {
     }
 }
 
-pub fn format_date(d: &DateTime<Utc>) -> String {
+pub(crate) fn format_date(d: &DateTime<Utc>) -> String {
     d.format("%Y-%m-%d %H:%M UTC").to_string()
 }
 
-pub fn active_status(closed: Option<bool>, active: Option<bool>) -> &'static str {
+pub(crate) fn active_status(closed: Option<bool>, active: Option<bool>) -> &'static str {
     if closed == Some(true) {
         "Closed"
     } else if active == Some(true) {
@@ -61,13 +61,13 @@ pub fn active_status(closed: Option<bool>, active: Option<bool>) -> &'static str
     }
 }
 
-pub fn print_json(data: &impl serde::Serialize) -> anyhow::Result<()> {
+pub(crate) fn print_json(data: &impl serde::Serialize) -> anyhow::Result<()> {
     println!("{}", serde_json::to_string_pretty(data)?);
     Ok(())
 }
 
 /// Print an error in the appropriate format for the current output mode.
-pub fn print_error(error: &anyhow::Error, format: OutputFormat) {
+pub(crate) fn print_error(error: &anyhow::Error, format: OutputFormat) {
     match format {
         OutputFormat::Json => {
             println!("{}", serde_json::json!({"error": error.to_string()}));
@@ -78,7 +78,7 @@ pub fn print_error(error: &anyhow::Error, format: OutputFormat) {
     }
 }
 
-pub fn print_detail_table(rows: Vec<[String; 2]>) {
+pub(crate) fn print_detail_table(rows: Vec<[String; 2]>) {
     let table = Table::from_iter(rows)
         .with(Style::rounded())
         .with(Modify::new(Columns::first()).with(Width::wrap(20)))

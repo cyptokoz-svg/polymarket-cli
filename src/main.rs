@@ -88,10 +88,7 @@ pub(crate) async fn run(cli: Cli) -> anyhow::Result<()> {
 
     match cli.command {
         Commands::Setup => commands::setup::execute(),
-        Commands::Shell => {
-            Box::pin(shell::run_shell()).await;
-            Ok(())
-        }
+        Commands::Shell => Box::pin(shell::run_shell()).await,
         Commands::Markets(args) => commands::markets::execute(&gamma, args, cli.output).await,
         Commands::Events(args) => commands::events::execute(&gamma, args, cli.output).await,
         Commands::Tags(args) => commands::tags::execute(&gamma, args, cli.output).await,
